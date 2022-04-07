@@ -100,9 +100,16 @@ onMounted(() => {
   fetchReq();
 });
 const fetchReq = async () => {
+  let headersList = {
+    Accept: "*/*",
+  };
+
   const res = await fetch(
-    `https://api.nomics.com/v1/currencies/ticker?key=${API_KEY}`,
-    { mode: "no-cors" }
+    "https://api.nomics.com/v1/currencies/ticker?key=bd2a11e007399e49b4410d30809298c9fc4d771c",
+    {
+      method: "GET",
+      headers: headersList,
+    }
   );
   const data = await res.json();
 
