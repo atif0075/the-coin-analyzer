@@ -17,7 +17,7 @@
             @keyup="searchCoin"
             v-model="search"
             type="text"
-            class="p-2 bg-light-primary w-full rounded bg-light-black border border-light-black border-dashed text-black outline-none"
+            class="p-2 bg-light-primary w-full rounded bg-[#f8f8f8] border border-light-green border-dashed text-black outline-none"
           />
         </div>
       </div>
@@ -33,28 +33,59 @@
     <div
       v-for="items in list"
       :key="items"
-      class="relative block py-8 px-3 bg-white md:px-8 border border-light-black shadow-xl rounded-xl overflow-auto"
+      class="relative block p-8 overflow-hidden border bg-white border-gray-100 rounded-lg"
     >
       <span
-        class="absolute right-2 md:right-4 top-2 md:top-4 rounded-full px-3 py-1.5 bg-light-black font-medium text-xs"
-      >
-        {{ items.coin }}
-      </span>
+        class="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600"
+      ></span>
 
-      <div class="mt-4 text-black sm:pr-8">
-        <img class="w-10 h-10" :src="items.url" :alt="items.name" />
+      <div class="justify-between sm:flex">
+        <div>
+          <h5 class="text-xl font-bold text-black">
+            {{ items.name }}
+          </h5>
+          <p
+            class="mt-1 text-xs font-medium bg-light-black inline-block px-2 py-1 text-black rounded-full"
+          >
+            {{ items.coin }}
+          </p>
+          <div>
+            <p
+              class="mt-1 text-xs font-medium bg-rose-300 px-2 py-1 text-black inline-block rounded-full"
+            >
+              {{ items.rate }}
+            </p>
+          </div>
+        </div>
 
-        <h5 class="mt-4 text-xl font-bold text-blue">{{ items.name }}</h5>
+        <div class="flex-shrink-0 hidden ml-3 sm:block">
+          <img
+            class="object-cover w-16 h-16 rounded-lg shadow-sm"
+            :src="items.url"
+            alt=""
+          />
+        </div>
+      </div>
 
-        <p class="hidden my-2 text-sm sm:block">
-          Investing has the best results when you learn from nature
+      <div class="mt-4 sm:pr-8">
+        <p class="text-sm text-gray-500">
+          Investing has the best results when you learn from nature. Planet
+          Earth has been alive for much longer than you or I and and it this
+          thing figured out
         </p>
       </div>
-      <span
-        class="absolute left-2 md:left-6 bottom-1 md:bottom-1 rounded-full px-3 py-1.5 bg-light-green font-medium text-xs"
-      >
-        $ {{ items.rate }}
-      </span>
+
+      <dl class="flex mt-6">
+        <div class="flex flex-col-reverse">
+          <dt class="text-sm font-medium text-gray-600">Highest Price</dt>
+          <dd class="text-xs text-gray-500">{{ items.highPrice }}</dd>
+        </div>
+
+        <div class="flex flex-col-reverse ml-3 sm:ml-6">
+          <dt class="text-sm font-medium text-gray-600">Last Update</dt>
+          <dd class="text-xs text-gray-500">{{ items.date }}</dd>
+        </div>
+      </dl>
     </div>
   </section>
 </template>
@@ -63,56 +94,50 @@
 let search = ref();
 let list = ref([]);
 let show = ref(true);
-const API_KEY = "db42ee3f98453699e716101d644f3135";
+const API_KEY = "bd2a11e007399e49b4410d30809298c9fc4d771c";
 let obj: any = {};
 onMounted(() => {
   fetchReq();
 });
 const fetchReq = async () => {
   const res = await fetch(
-    `http://api.coinlayer.com/list?access_key=${API_KEY}`
-  );
-  const rates = await fetch(
-    `http://api.coinlayer.com/live?access_key=${API_KEY}`
+    `https://api.nomics.com/v1/currencies/ticker?key=${API_KEY}`
   );
   const data = await res.json();
-  const rateData = await rates.json();
-  const rate = rateData.rates;
 
-  const crypto = data.crypto;
-
-  const crypto_values = Object.values(crypto);
-  const crypto_rates = Object.values(rate);
-  // store the values in the list
-  crypto_values.map((item, index) => {
-    return {
-      rate: crypto_rates[index],
+  // get id ,name,logo_url,price from data and put in obj
+  data.forEach((item: any) => {
+    obj[item.id] = {
+      coin: item.id,
+      name: item.name,
+      url: item.logo_url,
+      rate: item.price,
+      highPrice: item.high,
+      date: dateReader(item.price_date),
     };
   });
+  list.value = Object.values(obj);
 
-  const crypto_names = crypto_values.map((item) => item.name);
-  const crypto_url = crypto_values.map((item) => item.icon_url);
-  const crypto_coins = crypto_values.map((item) => item.symbol);
-  list.value = crypto_names;
-  crypto_names.forEach((item, index) => {
-    obj[item] = {
-      name: item,
-      url: crypto_url[index],
-      coin: crypto_coins[index],
-      rate: crypto_rates[index],
-    };
-  });
-  list.value = obj;
+  console.log(list.value);
+
   show.value = false;
 };
 
 const searchCoin = () => {
-  console.log("Hello");
-
   const filtered = Object.values(obj).filter((item) => {
     return item.name.toLowerCase().includes(search.value.toLowerCase());
   });
   list.value = filtered;
+};
+const dateReader = (date: any) => {
+  // convert raw date to readable date
+  const newDate = new Date(date);
+  const options: any = {
+    year: "numeric",
+    day: "numeric",
+    month: "long",
+  };
+  return newDate.toLocaleDateString("en-US", options);
 };
 </script>
 
