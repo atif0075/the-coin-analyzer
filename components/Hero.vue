@@ -7,7 +7,7 @@
         </h1>
 
         <p
-          class="mt-4 pb-7 sm:leading-relaxed text-xs px-4 sm:text-sm text-black  font-sans capitalize"
+          class="mt-4 pb-7 sm:leading-relaxed text-xs px-4 sm:text-sm text-black font-sans capitalize"
         >
           Instantly retrieve up-to-date crypto exchange rate data for more than
           385 cryptocurrencies, collected from 25+ exchanges.
@@ -63,7 +63,7 @@
 let search = ref();
 let list = ref([]);
 let show = ref(true);
-const API_KEY = "c6ca4403481f9737b2ade6035e9df273";
+const API_KEY = "db42ee3f98453699e716101d644f3135";
 let obj: any = {};
 onMounted(() => {
   fetchReq();
