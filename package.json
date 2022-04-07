@@ -1,0 +1,23 @@
+{
+  "private": true,
+  "scripts": {
+    "dev": "nuxi dev",
+    "build": "nuxi build",
+    "start": "node .output/server/index.mjs",
+    "allupdate": "yarn upgrade-interactive"
+  },
+  "devDependencies": {
+    "autoprefixer": "10.4.4",
+    "nuxt3": "3.0.0-27460489.53fbca7",
+    "postcss": "8.4.12",
+    "tailwindcss": "3.0.23"
+  },
+  "dependencies": {
+    "@pinia/nuxt": "0.1.8",
+    "pinia": "2.0.12"
+  },
+  "engines": {
+    "node": "^14.16.0 || ^16.11.0 || ^17.0.0"
+  },
+  "packageManager": "yarn@3.2.0"
+}
