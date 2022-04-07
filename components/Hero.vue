@@ -107,6 +107,7 @@ const fetchReq = async () => {
   const res = await fetch(
     "https://api.nomics.com/v1/currencies/ticker?key=bd2a11e007399e49b4410d30809298c9fc4d771c",
     {
+      mode: "no-cors",
       method: "GET",
       headers: headersList,
     }
