@@ -90,12 +90,12 @@
   </section>
 </template>
 
-<script lang="ts" setup>
+<script setup>
 let search = ref();
 let list = ref([]);
 let show = ref(true);
 const API_KEY = "bd2a11e007399e49b4410d30809298c9fc4d771c";
-let obj: any = {};
+let obj = {};
 onMounted(() => {
   fetchReq();
 });
@@ -107,15 +107,13 @@ const fetchReq = async () => {
   const res = await fetch(
     "https://api.nomics.com/v1/currencies/ticker?key=bd2a11e007399e49b4410d30809298c9fc4d771c",
     {
-      mode: "no-cors",
-      method: "GET",
       headers: headersList,
     }
   );
   const data = await res.json();
 
   // get id ,name,logo_url,price from data and put in obj
-  data.forEach((item: any) => {
+  data.forEach((item) => {
     obj[item.id] = {
       coin: item.id,
       name: item.name,
@@ -136,10 +134,10 @@ const searchCoin = () => {
   });
   list.value = filtered;
 };
-const dateReader = (date: any) => {
+const dateReader = (date) => {
   // convert raw date to readable date
   const newDate = new Date(date);
-  const options: any = {
+  const options = {
     year: "numeric",
     day: "numeric",
     month: "long",
