@@ -101,7 +101,8 @@ onMounted(() => {
 });
 const fetchReq = async () => {
   const res = await fetch(
-    `https://api.nomics.com/v1/currencies/ticker?key=${API_KEY}`
+    `https://api.nomics.com/v1/currencies/ticker?key=${API_KEY}`,
+    { mode: "no-cors" }
   );
   const data = await res.json();
 
@@ -117,8 +118,6 @@ const fetchReq = async () => {
     };
   });
   list.value = Object.values(obj);
-
-  console.log(list.value);
 
   show.value = false;
 };
