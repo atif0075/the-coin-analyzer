@@ -27,8 +27,8 @@
     <Loading />
   </section>
   <section
-    v-else
-    class="grid md:grid-cols-3 grid-cols-2 gap-4 px-2 md:px-20 lg:px-44"
+    v-if="!show"
+    class="grid lg:grid-cols-3 grid-cols-1 sm:grid-cols-2 gap-4 px-2 md:px-20 lg:px-44"
   >
     <div
       v-for="items in list"
@@ -39,7 +39,7 @@
         class="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600"
       ></span>
 
-      <div class="justify-between sm:flex">
+      <div class="justify-between flex">
         <div>
           <h5 class="text-xl font-bold text-black">
             {{ items.name }}
@@ -58,7 +58,7 @@
           </div>
         </div>
 
-        <div class="flex-shrink-0 hidden ml-3 sm:block">
+        <div class=" ">
           <img
             class="object-cover w-16 h-16 rounded-lg shadow-sm"
             :src="items.url"
@@ -88,60 +88,76 @@
       </dl>
     </div>
   </section>
+  <main class="flex justify-center items-center py-5">
+    <button
+      class="px-10 py-2 bg-light-green rounded font-bold text-black text-base"
+      @click="showMore"
+    >
+      Next
+    </button>
+  </main>
+  <main>
+    <BackTop />
+  </main>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 let search = ref();
 let list = ref([]);
+
 let show = ref(true);
-const API_KEY = "bd2a11e007399e49b4410d30809298c9fc4d771c";
-let obj = {};
+let limit = ref(12);
+
+let obj: any = {};
 onMounted(() => {
   fetchReq();
 });
+const showMore = () => {
+  console.log(limit.value);
+
+  if (limit.value <= 80) {
+    limit.value += 12;
+    fetchReq();
+  } else {
+    console.log("All data has been loaded");
+  }
+};
+
 const fetchReq = async () => {
   let response = await fetch(
-    "https://min-api.cryptocompare.com/data/top/totaltoptiervolfull?limit=2&tsym=USD"
+    `https://min-api.cryptocompare.com/data/top/totaltoptiervolfull?limit=${limit.value}&tsym=USD`
   );
   let data = await response.json();
-  // get id ,name,logo_url,price from data and put in obj
+  list.value = [];
+  // get the data from the api and store it in the list array using for loop and try catch
   for (let i = 0; i < data.Data.length; i++) {
-    obj = {
-      id: data.Data[i].CoinInfo.Id,
-      name: data.Data[i].CoinInfo.FullName,
-      url: `https://www.cryptocompare.com/${data.Data[i].CoinInfo.ImageUrl}`,
-      rate: data.Data[i].RAW.USD.PRICE,
-      coin: data.Data[i].RAW.USD.FROMSYMBOL,
-      highPrice: data.Data[i].RAW.USD.HIGHDAY,
-      date: data.Data[i].RAW.USD.LASTUPDATE,
-    };
+    try {
+      obj = {
+        name: data.Data[i].CoinInfo.FullName,
+        coin: data.Data[i].CoinInfo.Name,
+        url: `https://www.cryptocompare.com/${data.Data[i].CoinInfo.ImageUrl}`,
+        rate: data.Data[i].DISPLAY.USD.PRICE,
+        highPrice: data.Data[i].DISPLAY.USD.HIGHDAY,
+        date: data.Data[i].DISPLAY.USD.LASTUPDATE,
+      };
+    } catch (error) {
+      obj = {
+        name: data.Data[i].CoinInfo.FullName,
+        coin: data.Data[i].CoinInfo.Name,
+        url: data.Data[i].CoinInfo.ImageUrl,
+        rate: "N/A",
+        highPrice: "N/A",
+        date: "Just Now",
+      };
+    }
     list.value.push(obj);
   }
-  // list.value = Object.values(obj);
-  list.value = list.value.map((item) => {
-    item.rate = item.rate.toFixed(2);
-    return item;
-  });
+
   console.log(list.value);
   show.value = false;
 };
 
-const searchCoin = () => {
-  const filtered = Object.values(obj).filter((item) => {
-    return item.name.toLowerCase().includes(search.value.toLowerCase());
-  });
-  list.value = filtered;
-};
-const dateReader = (date) => {
-  // convert raw date to readable date
-  const newDate = new Date(date);
-  const options = {
-    year: "numeric",
-    day: "numeric",
-    month: "long",
-  };
-  return newDate.toLocaleDateString("en-US", options);
-};
+const searchCoin = () => {};
 </script>
 
 <style></style>
