@@ -1,12 +1,12 @@
 <template>
-  <main class="relative">
+  <main v-show="showBTN" class="relative">
     <button
       type="button"
       @click="backToTop"
-      class="fixed bottom-4 bg-light-black p-5"
+      class="fixed left-0 sm:left-3 md:left-10 bottom-4 bg-purple p-5"
     >
       <svg
-        class="w-6 h-6 text-green"
+        class="w-6 h-6 text-white"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
@@ -22,14 +22,23 @@
     </button>
   </main>
 </template>
-
 <script lang="ts" setup>
+const showBTN = ref(false);
 const backToTop = () => {
   window.scrollTo({
     top: 0,
     behavior: "smooth",
   });
 };
-</script>
 
-<style></style>
+// show back to top button when scroll down the page and hide it when scroll up
+onMounted(() => {
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 100) {
+      showBTN.value = true;
+    } else {
+      showBTN.value = false;
+    }
+  });
+});
+</script>

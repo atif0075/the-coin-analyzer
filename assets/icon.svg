@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="48" height="48" viewBox="0 0 48 48"
     style=" fill:#000000;">
-    <path fill="#61e3a7" d="M44,7v35h-8V7c0-0.552,0.448-1,1-1h6C43.552,6,44,6.448,44,7z"></path>
-    <path fill="#33c481" d="M36,13v29h-8V14c0-0.552,0.448-1,1-1H36z"></path>
-    <path fill="#21a366" d="M28,17v25h-8V18c0-0.552,0.448-1,1-1H28z"></path>
-    <path fill="#107c42" d="M20,21v21h-8V22c0-0.552,0.448-1,1-1H20z"></path>
-    <path fill="#185c37" d="M12,25v17H4V26c0-0.552,0.448-1,1-1H12z"></path>
+    <path fill="#dbd0f4" d="M44,7v35h-8V7c0-0.552,0.448-1,1-1h6C43.552,6,44,6.448,44,7z"></path>
+    <path fill="#b7a2e9" d="M36,13v29h-8V14c0-0.552,0.448-1,1-1H36z"></path>
+    <path fill="#4b16c7" d="M28,17v25h-8V18c0-0.552,0.448-1,1-1H28z"></path>
+    <path fill="#3c129f" d="M20,21v21h-8V22c0-0.552,0.448-1,1-1H20z"></path>
+    <path fill="#1e0950" d="M12,25v17H4V26c0-0.552,0.448-1,1-1H12z"></path>
     <radialGradient id="6xjs7M28ojIY8mmqz53ema" cx="38.319" cy="38.468" r="12.213" gradientUnits="userSpaceOnUse">
         <stop offset="0"></stop>
         <stop offset=".979" stop-opacity="0"></stop>

@@ -7,7 +7,20 @@
       <img src="../assets/icon.svg" alt="" />
     </a>
 
-    <ul class="flex items-center space-x-2 text-sm font-medium text-black">
+    <ul class="flex items-center space-x-2 text-sm font-medium text-white">
+      <li>
+        <nuxt-link class="inline-flex items-center px-3 py-2 rounded-lg" to="/">
+          Home
+        </nuxt-link>
+      </li>
+      <li>
+        <nuxt-link
+          class="inline-flex items-center px-3 py-2 rounded-lg"
+          to="/all-coin"
+        >
+          All Coin
+        </nuxt-link>
+      </li>
       <li>
         <a
           class="inline-flex items-center px-3 py-2 rounded-lg"

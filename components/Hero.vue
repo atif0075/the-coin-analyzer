@@ -1,28 +1,5 @@
 <template>
-  <section>
-    <div class="max-w-screen-xl mx-auto pb-12 lg:items-center lg:flex">
-      <div class="max-w-xl mx-auto text-center">
-        <h1 class="text-3xl font-serif text-green font-extrabold sm:text-5xl">
-          The Coin Analyzer
-        </h1>
-
-        <p
-          class="mt-4 pb-7 sm:leading-relaxed text-xs px-4 sm:text-sm text-black font-sans capitalize"
-        >
-          Instantly retrieve up-to-date crypto exchange rate data for more than
-          385 cryptocurrencies, collected from 25+ exchanges.
-        </p>
-        <div class="px-2">
-          <input
-            @keyup="searchCoin"
-            v-model="search"
-            type="text"
-            class="p-2 bg-light-primary w-full rounded bg-[#f8f8f8] border border-light-green border-dashed text-black outline-none"
-          />
-        </div>
-      </div>
-    </div>
-  </section>
+  <Content />
   <section v-if="show">
     <Loading />
   </section>
@@ -33,10 +10,10 @@
     <div
       v-for="items in list"
       :key="items"
-      class="relative block p-8 overflow-hidden border bg-white border-gray-100 rounded-lg"
+      class="relative block p-8 overflow-hidden bg-white rounded-lg"
     >
       <span
-        class="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600"
+        class="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-[#6a36e4] via-[#a38ed3] to-[#4501e6]"
       ></span>
 
       <div class="justify-between flex">
@@ -90,10 +67,10 @@
   </section>
   <main class="flex justify-center items-center py-5">
     <button
-      class="px-10 py-2 bg-light-green rounded font-bold text-black text-base"
+      class="px-10 py-2 bg-purple rounded font-bold text-white text-base"
       @click="showMore"
     >
-      Next
+      {{ text }}
     </button>
   </main>
   <main>
@@ -102,24 +79,21 @@
 </template>
 
 <script lang="ts" setup>
-let search = ref();
 let list = ref([]);
 
 let show = ref(true);
 let limit = ref(12);
-
+let text = ref("Next");
 let obj: any = {};
 onMounted(() => {
   fetchReq();
 });
 const showMore = () => {
-  console.log(limit.value);
-
   if (limit.value <= 80) {
-    limit.value += 12;
+    limit.value += 12; 
     fetchReq();
   } else {
-    console.log("All data has been loaded");
+    text.value = "All data has been loaded";
   }
 };
 
@@ -144,7 +118,7 @@ const fetchReq = async () => {
       obj = {
         name: data.Data[i].CoinInfo.FullName,
         coin: data.Data[i].CoinInfo.Name,
-        url: data.Data[i].CoinInfo.ImageUrl,
+        url: `https://www.cryptocompare.com/${data.Data[i].CoinInfo.ImageUrl}`,
         rate: "N/A",
         highPrice: "N/A",
         date: "Just Now",
@@ -156,8 +130,6 @@ const fetchReq = async () => {
   console.log(list.value);
   show.value = false;
 };
-
-const searchCoin = () => {};
 </script>
 
 <style></style>

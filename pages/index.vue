@@ -1,11 +1,7 @@
 <template>
-  <main>
-    <Navbar />
-    <div class=" py-12">
-
+  <div class="py-12">
     <Hero />
-    </div>
-  </main>
+  </div>
 </template>
 
 <script lang="ts"></script>

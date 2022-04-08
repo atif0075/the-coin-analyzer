@@ -16,11 +16,10 @@ module.exports = {
         serif: ["DM Serif Display", "serif"],
       },
       colors: {
-        primary: "#f3fcf9",
-        black: "#434039",
-        green: "#21a366",
-        'light-black': "#9c9b9a3b",
-        'light-green': '#B2DDB6',
+        white: "#F8F8F8",
+        primary: "#100920",
+        purple: "#4B16C7",
+       
       }
     },
   },

@@ -5,6 +5,7 @@ import "./assets/tailwind.css";
 <template>
   <section class="bg-primary">
     <div class="container mx-auto min-h-screen">
+      <Navbar />
       <NuxtPage />
     </div>
   </section>
@@ -15,7 +16,10 @@ import "./assets/tailwind.css";
 *::-webkit-scrollbar {
   width: 4px;
 }
-*::-webkit-scrollbar-corner {
-  @apply bg-green;
+*::-webkit-scrollbar-track {
+  @apply bg-primary;
+}
+*::-webkit-scrollbar-thumb {
+  @apply bg-purple;
 }
 </style>
