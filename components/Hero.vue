@@ -8,7 +8,7 @@
     class="grid lg:grid-cols-3 grid-cols-1 sm:grid-cols-2 gap-4 px-2 md:px-20 lg:px-44"
   >
     <div
-      v-for="items in list"
+      v-for="items in list" 
       :key="items"
       class="relative block p-8 overflow-hidden bg-white rounded-lg"
     >
