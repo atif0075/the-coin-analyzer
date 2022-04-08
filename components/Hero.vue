@@ -100,18 +100,11 @@ onMounted(() => {
   fetchReq();
 });
 const fetchReq = async () => {
-  let headersList = {
-    Accept: "*/*",
-  };
-  // Access to fetch at 'https://api.nomics.com/v1/currencies/ticker?key=bd2a11e007399e49b4410d30809298c9fc4d771c' from origin 'https://master--nuxtcoin.netlify.app' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. If an opaque response serves your needs, set the request's mode to 'no-cors' to fetch the resource with CORS disabled.
   let response = await fetch(
-    "https://api.nomics.com/v1/currencies/ticker?key=" + API_KEY,
-    {
-      headers: headersList,
-    }
+    "https://min-api.cryptocompare.com/data/top/totaltoptiervolfull?limit=2&tsym=USD"
   );
   let data = await response.json();
- 
+  console.log(data);
   // get id ,name,logo_url,price from data and put in obj
   data.forEach((item) => {
     obj[item.id] = {
