@@ -104,20 +104,25 @@ const fetchReq = async () => {
     "https://min-api.cryptocompare.com/data/top/totaltoptiervolfull?limit=2&tsym=USD"
   );
   let data = await response.json();
-  console.log(data);
   // get id ,name,logo_url,price from data and put in obj
-  data.forEach((item) => {
-    obj[item.id] = {
-      coin: item.id,
-      name: item.name,
-      url: item.logo_url,
-      rate: item.price,
-      highPrice: item.high,
-      date: dateReader(item.price_date),
+  for (let i = 0; i < data.Data.length; i++) {
+    obj = {
+      id: data.Data[i].CoinInfo.Id,
+      name: data.Data[i].CoinInfo.FullName,
+      url: `https://www.cryptocompare.com/${data.Data[i].CoinInfo.ImageUrl}`,
+      rate: data.Data[i].RAW.USD.PRICE,
+      coin: data.Data[i].RAW.USD.FROMSYMBOL,
+      highPrice: data.Data[i].RAW.USD.HIGHDAY,
+      date: data.Data[i].RAW.USD.LASTUPDATE,
     };
+    list.value.push(obj);
+  }
+  // list.value = Object.values(obj);
+  list.value = list.value.map((item) => {
+    item.rate = item.rate.toFixed(2);
+    return item;
   });
-  list.value = Object.values(obj);
-
+  console.log(list.value);
   show.value = false;
 };
 
