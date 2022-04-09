@@ -9,17 +9,20 @@
 
     <ul class="flex items-center space-x-2 text-sm font-medium text-white">
       <li>
-        <nuxt-link class="inline-flex items-center px-3 py-2 rounded-lg" to="/">
+        <RouterLink
+          class="inline-flex items-center focus:text-sm px-3 py-2 rounded-lg"
+          to="/"
+        >
           Home
-        </nuxt-link>
+        </RouterLink>
       </li>
       <li>
-        <nuxt-link
-          class="inline-flex items-center px-3 py-2 rounded-lg"
+        <RouterLink
+          class="inline-flex items-center focus:text-sm px-3 py-2 rounded-lg"
           to="/all-coin"
         >
           All Coin
-        </nuxt-link>
+        </RouterLink>
       </li>
       <li>
         <a
@@ -50,4 +53,8 @@
 
 <script lang="ts" setup></script>
 
-<style></style>
+<style lang="postcss">
+a.router-link-active {
+  @apply font-bold text-[#a38ed3];
+}
+</style>

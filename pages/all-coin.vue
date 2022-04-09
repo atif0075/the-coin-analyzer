@@ -1,6 +1,6 @@
 <template>
   <Loading v-if="!showObj" />
-  <main class="px-2 md:px-20 lg:px-44 py-6" v-else>
+  <main class="px-2 md:px-20 lg:px-44 py-6 min-h-screen" v-else>
     <h1 class="text-3xl font-serif text-white font-extrabold">All coins</h1>
     <section
       style="margin-top: 10px"
@@ -40,7 +40,7 @@
             />
           </div>
         </div>
-       
+
         <dl class="flex mt-6">
           <div class="flex flex-col-reverse">
             <dt class="text-xs font-medium text-gray-600">Highest Price</dt>
@@ -53,7 +53,7 @@
         </dl>
       </div>
     </section>
-    <section class="flex justify-center items-center">
+    <section class="flex justify-center items-center py-5">
       <div class="flex justify-center space-x-1">
         <button
           @click="prevPage"
@@ -72,7 +72,7 @@
             />
           </svg>
         </button>
-
+       
         <div
           style="padding: 0 20px"
           class="bg-purple text-sm font-medium text-center flex justify-center items-center rounded"

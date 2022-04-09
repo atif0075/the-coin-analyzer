@@ -8,6 +8,7 @@ import "./assets/tailwind.css";
       <Navbar />
       <NuxtPage />
     </div>
+    <BackTop />
   </section>
 </template>
 
