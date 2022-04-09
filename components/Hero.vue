@@ -5,7 +5,6 @@
   </section>
   <main v-else>
     <section
-     
       class="grid lg:grid-cols-3 grid-cols-1 sm:grid-cols-2 gap-4 px-4 md:px-20 lg:px-44"
     >
       <div

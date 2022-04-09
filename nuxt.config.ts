@@ -5,13 +5,11 @@ export default defineNuxtConfig({
         title: 'The Coin Analyzer',
         link: [
             {
-                rel: 'icon', type: 'image/png', href: './assets/icon.svg',
+                rel: 'icon', type: 'image/png', href: 'https://raw.githubusercontent.com/atif0075/the-coin-analyzer/master/assets/icon.svg',
             },
         ],
     },
-    buildModules: [
-        "@pinia/nuxt",
-    ],
+  
     build: {
         postcss: {
             postcssOptions: {
@@ -26,9 +24,9 @@ export default defineNuxtConfig({
         logLevel: "info",
         optimizeDeps: {
             include: [
-                'vue', 'pinia'
+                'vue'
             ]
         }
     },
-  
+
 });
