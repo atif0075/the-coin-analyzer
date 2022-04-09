@@ -1,11 +1,14 @@
 <template>
   <nav class="flex items-center justify-between md:px-20 lg:px-44 p-4 mx-auto">
-    <a
+    <RouterLink
       class="inline-flex items-center justify-center w-10 h-10 rounded-lg"
-      href="/"
+      to="/"
     >
-      <img src="../assets/icon.svg" alt="" />
-    </a>
+      <img
+        src="https://raw.githubusercontent.com/atif0075/the-coin-analyzer/master/assets/icon.svg"
+        alt=""
+      />
+    </RouterLink>
 
     <ul class="flex items-center space-x-2 text-sm font-medium text-white">
       <li>
